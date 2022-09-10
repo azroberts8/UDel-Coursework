@@ -384,76 +384,76 @@ void Board::printBoard() {
 //mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
 
 	// this is about to get messy; I wouldn't even suggest trying to understand it
-	for(int y = -1; y < 20; x++) {
-		for(int x = -1; x < 20; y++) {
+	for(int y = -1; y < 21; y++) {
+		for(int x = -1; x < 21; x++) {
 			if(y == -1) {
 				// draw top border
 				if(x == -1) {
 					// left corner
 					if(starty == 0) {
-						cout << "  ━━";
+						cout << "  ━━━";
 					} else {
-						cout << "   ┏";
+						cout << "    ┏";
 					}
 				} else if(x == 20) {
 					// right corner
 					if(endy == 0) {
-						cout << "━━";
+						cout << "━━━";
 					} else {
 						cout << "┓";
 					}
 				} else {
-					cout << "━";
+					cout << "━━";
 				}
 			} else if(y == 20) {
 				// draw bottom border
 				if(x == -1) {
 					// left corner
 					if(starty == 19) {
-						cout << "  ━━";
+						cout << "  ━━━";
 					} else {
-						cout << "   ┗";
+						cout << "    ┗";
 					}
 				} else if(x == 20) {
 					// right corner
 					if(endy == 19) {
-						cout << "━━";
+						cout << "━━━";
 					} else {
 						cout << "┛";
 					}
 				} else {
-					cout << "━";
+					cout << "━━";
 				}
 			} else {
 				if(x == -1) {
 					// left border
 					if(y == starty - 1) {
-						cout << "  ━┛"
+						cout << "  ━━┛";
 					} else if(y == starty) {
-						cout << "  ⮕ ";
+						cout << "  ⮕  ";
 					} else if(y == starty + 1) {
-						cout << "  ━┓";
+						cout << "  ━━┓";
 					} else {
-						cout << "   ┃";
+						cout << "    ┃";
 					}
 				} else if(x == 20) {
 					// right border
 					if(y == endy - 1) {
-						cout << "┗━";
+						cout << "┗━━";
 					} else if(y == endy) {
-						cout << " ⮕";
+						cout << " ⮕ ";
 					} else if(y == endy + 1) {
-						cout << "┏━"
+						cout << "┏━━";
 					} else {
-						cout << "┃";
+						cout << "┃ ";
 					}
 				} else {
 					// board characters
-					cout << " ";
+					cout << "  ";
 				}
 			}
-			cout << endl;
 		}
+		cout << endl;
 	}
 	
 }
