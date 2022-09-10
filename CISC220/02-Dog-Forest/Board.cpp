@@ -382,6 +382,79 @@ void Board::printBoard() {
 //	 for where the beginning of the game was and where the end of the game was.
 
 //mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
+
+	// this is about to get messy; I wouldn't even suggest trying to understand it
+	for(int y = -1; y < 20; x++) {
+		for(int x = -1; x < 20; y++) {
+			if(y == -1) {
+				// draw top border
+				if(x == -1) {
+					// left corner
+					if(starty == 0) {
+						cout << "  ━━";
+					} else {
+						cout << "   ┏";
+					}
+				} else if(x == 20) {
+					// right corner
+					if(endy == 0) {
+						cout << "━━";
+					} else {
+						cout << "┓";
+					}
+				} else {
+					cout << "━";
+				}
+			} else if(y == 20) {
+				// draw bottom border
+				if(x == -1) {
+					// left corner
+					if(starty == 19) {
+						cout << "  ━━";
+					} else {
+						cout << "   ┗";
+					}
+				} else if(x == 20) {
+					// right corner
+					if(endy == 19) {
+						cout << "━━";
+					} else {
+						cout << "┛";
+					}
+				} else {
+					cout << "━";
+				}
+			} else {
+				if(x == -1) {
+					// left border
+					if(y == starty - 1) {
+						cout << "  ━┛"
+					} else if(y == starty) {
+						cout << "  ⮕ ";
+					} else if(y == starty + 1) {
+						cout << "  ━┓";
+					} else {
+						cout << "   ┃";
+					}
+				} else if(x == 20) {
+					// right border
+					if(y == endy - 1) {
+						cout << "┗━";
+					} else if(y == endy) {
+						cout << " ⮕";
+					} else if(y == endy + 1) {
+						cout << "┏━"
+					} else {
+						cout << "┃";
+					}
+				} else {
+					// board characters
+					cout << " ";
+				}
+			}
+			cout << endl;
+		}
+	}
 	
 }
 
