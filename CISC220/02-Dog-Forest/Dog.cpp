@@ -1,7 +1,7 @@
 /*
  * Dog.cpp
  *
- *  Created on: Sep 8, 2022
+ *  Created on: Sep 11, 2022
  *      Author: stephenwiafe
  */
 
@@ -37,36 +37,34 @@ bool Dog::changeStrength(int amt)
 	}else{
 		die();
 	}
-
-
-
-
 }// end of changeStrength function
+
 
 void Dog::die()
 {
+	cout << "Dog died...ACK!!!" << endl;
 
 }//end of die function
 
 void Dog::printDog()
 {
+	cout << name << ": Strength: " << strength << endl;
 
 }//end of printDog function
 
 void Dog::won()
 {
+	cout << "CONGRATULATIONS!!!  You have successfully navigate fido through the evil forest!!!" << endl;
 
 }//end of won function
 
 void Dog::reset()
 {
+	strength = 50;
+	x = 0;
+	y = 0;
 
 }//end of reset function
-
-
-
-
-
 
 
 
