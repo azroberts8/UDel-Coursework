@@ -8,7 +8,7 @@
 #ifndef BOARD_HPP_
 #define BOARD_HPP_
 
-#include "Dog.hpp"
+//#include "Dog.hpp"
 #include <iostream>
 #include <string.h>
 using namespace std;
@@ -36,7 +36,7 @@ class Board {
 			{'8','9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7'},
 			{'9','0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8'}};
 	//Note:  I gave the board initial values so you can test your printBoard method.  Normally you
-	// wouldn’t need to do this.
+	// wouldnï¿½t need to do this.
 
 	int wallStrength;  //the amount of strenght needed to take down part of the wall (6)
 	int startx;  //Where the dog enters the board (randomly along the left side)

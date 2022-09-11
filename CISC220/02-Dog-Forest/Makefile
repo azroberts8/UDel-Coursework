@@ -2,7 +2,7 @@ CC=gcc
 CCFLAGS=-lstdc++
 
 all:
-	$(CC) -o dogForest mainGame.cpp $(CCFLAGS)
+	$(CC) -o dogForest mainGame.cpp Board.cpp $(CCFLAGS)
 
 run: all
 	./dogForest
