@@ -18,9 +18,7 @@ Board::Board(bool d){
 Board::Board(char diff, string name, bool d) {
 	level = diff;
 	debug = d;
-	//mydog.name = name;
-	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-	//COMMENT the above line BACK IN AFTER YOU WRITE YOUR DOG CLASS
+	mydog.name = name;
 	wallStrength = 6;
 	InitAll();
 }
@@ -35,6 +33,7 @@ void Board::InitAll() {
 	// First:  Write and test printBoard following the instructions inside of
 	// the printBoard Method below.  Then test it to make sure it's working
 	// properly.
+	cout << "starty: " << starty << " endy: " << endy << endl;
 	printBoard();
 	// Your output should be this:
 	//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
@@ -381,7 +380,7 @@ void Board::printBoard() {
 //	 I placed an -> arro (thats a minus and a greater than sign) in the border
 //	 for where the beginning of the game was and where the end of the game was.
 
-//mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
+	mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
 
 	// this is about to get messy; I wouldn't even suggest trying to understand it
 	for(int y = -1; y < 21; y++) {

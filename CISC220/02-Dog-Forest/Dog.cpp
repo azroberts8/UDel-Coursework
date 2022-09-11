@@ -27,7 +27,7 @@ Dog::Dog()
 } //end of Dog(string) constructor
 
 
-bool changeStrength(int amt)
+bool Dog::changeStrength(int amt)
 {
 	strength += amt;
 	printDog();

@@ -8,7 +8,7 @@
 #ifndef BOARD_HPP_
 #define BOARD_HPP_
 
-//#include "Dog.hpp"
+#include "Dog.hpp"
 #include <iostream>
 #include <string.h>
 using namespace std;
@@ -44,7 +44,7 @@ class Board {
 	int endx;  // THe goal location on the right side (random x value)
 	int endy;  // will be size -1
 	char level; //'e' for easy, 'm' for medium, 'h' for hard (user can input in the initAll() method)
-	//Dog mydog;  //the dog object that's moving through
+	Dog mydog;  //the dog object that's moving through
 	//^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 	//comment the above line in when you write your dog class!!!
 	bool debug;

@@ -13,6 +13,11 @@ using namespace std;
 class Dog
 {
 	friend class Board;
+	string name;
+	int strength;
+	int x;
+	int y;
+	
 public:
 	Dog(string n);
 	Dog();
@@ -22,11 +27,6 @@ public:
 	void won();
 	void reset();
 
-private:
-	string name;
-	int strength;
-	int x;
-	int y;
 }; // end of class
 
 #endif /* DOG_HPP_ */
