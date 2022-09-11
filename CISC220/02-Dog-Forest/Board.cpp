@@ -398,9 +398,9 @@ void Board::printBoard() {
 				} else if(x == 20) {
 					// right corner
 					if(endy == 0) {
-						cout << "━━━";
+						cout << "━━━━";
 					} else {
-						cout << "┓";
+						cout << "━┓";
 					}
 				} else {
 					cout << "━━";
@@ -417,9 +417,9 @@ void Board::printBoard() {
 				} else if(x == 20) {
 					// right corner
 					if(endy == 19) {
-						cout << "━━━";
+						cout << "━━━━";
 					} else {
-						cout << "┛";
+						cout << "━┛";
 					}
 				} else {
 					cout << "━━";
@@ -439,17 +439,31 @@ void Board::printBoard() {
 				} else if(x == 20) {
 					// right border
 					if(y == endy - 1) {
-						cout << "┗━━";
+						cout << " ┗━━";
 					} else if(y == endy) {
-						cout << " ⮕ ";
+						cout << "  ⮕ ";
 					} else if(y == endy + 1) {
-						cout << "┏━━";
+						cout << " ┏━━";
 					} else {
-						cout << "┃ ";
+						cout << " ┃ ";
 					}
 				} else {
 					// board characters
-					cout << "  ";
+					if(board[y][x] == '|') {
+						// wall 1
+						cout << "🌳🌳";
+					} else if(board[y][x] == '-') {
+						// wall 2
+						cout << "🌲🌲";
+					} else if(board[y][x] == 'F') {
+						// food
+						cout << " 🍗";
+					} else if(board[y][x] == 'T') {
+						// trap
+						cout << " 🪤";
+					} else {
+						cout << " " << board[y][x];
+					}
 				}
 			}
 		}
