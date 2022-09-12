@@ -382,8 +382,8 @@ void Board::printBoard() {
 	mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
 
 	// this is about to get messy; I wouldn't even suggest trying to understand it
-	for(int y = -1; y < 21; y++) {
-		for(int x = -1; x < 21; x++) {
+	for(int y = -1; y < size + 1; y++) {
+		for(int x = -1; x < size + 1; x++) {
 			if(y == -1) {
 				// draw top border
 				if(x == -1) {
@@ -393,7 +393,7 @@ void Board::printBoard() {
 					} else {
 						cout << "    ┏";
 					}
-				} else if(x == 20) {
+				} else if(x == size) {
 					// right corner
 					if(endy == 0) {
 						cout << "━━━━";
@@ -403,7 +403,7 @@ void Board::printBoard() {
 				} else {
 					cout << "━━";
 				}
-			} else if(y == 20) {
+			} else if(y == size) {
 				// draw bottom border
 				if(x == -1) {
 					// left corner
@@ -412,7 +412,7 @@ void Board::printBoard() {
 					} else {
 						cout << "    ┗";
 					}
-				} else if(x == 20) {
+				} else if(x == size) {
 					// right corner
 					if(endy == 19) {
 						cout << "━━━━";
@@ -434,7 +434,7 @@ void Board::printBoard() {
 					} else {
 						cout << "    ┃";
 					}
-				} else if(x == 20) {
+				} else if(x == size) {
 					// right border
 					if(y == endy - 1) {
 						cout << " ┗━━";
@@ -475,15 +475,15 @@ void Board::boardConfig() {
 	// put "dummy values" in each square
 	int y;
 	int x;
-	for(y = 0; y < 20; y++) {
-		for(x = 0; x < 20; x++) {
+	for(y = 0; y < size; y++) {
+		for(x = 0; x < size; x++) {
 			board[y][x] = ' ';
 		}
 	}
 
 
 	// there will be 12 walls total; randomly select how many will be vertical/horizontal with at least 2 on each axis
-	int horizontal = (rand() % 10) + 2;
+	int horizontal = (rand() % 8) + 2;
 	int vertical = 12 - horizontal;
 
 	// add horizontal walls
@@ -492,7 +492,7 @@ void Board::boardConfig() {
 	int length;
 	float positionRange = 10.0 / horizontal;
 	int position[2] = {0, 0};
-	cout << "rows: " << horizontal << "; columns: " << vertical << "; positionRange: " << positionRange << endl;
+	cout << "rows: " << horizontal << "; columns: " << vertical << "; mode: " << level << endl;
 	for(i = 0; i < horizontal; i++) {
 		// select wall length (at least 3 in length, longer lengths & higher probability of longer lengths with harder levels)
 		switch(level) {
@@ -555,7 +555,28 @@ void Board::addFood() {
 	 * move onto) the food is determined in the moveDog method.
 	 */
 
+	int treats;
+	switch(level) {
+		case 'e':
+			treats = size;
+			break;
+		case 'm':
+			treats = size - 2;
+			break;
+		case 'h':
+			treats = size - 4;
+			break;
+	}
 
+	int x;
+	int y;
+	for(int i = 0; i < treats; i++) {
+		do {
+			x = rand() % size;
+			y = rand() % size;
+		} while (board[y][x] != ' ');
+		board[y][x] = 'F';
+	}
 }
 
 void Board::addTraps() {
