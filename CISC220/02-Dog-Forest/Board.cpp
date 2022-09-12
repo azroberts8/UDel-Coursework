@@ -456,9 +456,11 @@ void Board::printBoard() {
 					} else if(board[y][x] == 'F') {
 						// food
 						cout << "🍗";
-					} else if(board[y][x] == 'T') {
+					} else if(board[y][x] == 'T' && debug) {
 						// trap
-						cout << "🪤";
+						cout << " ☠";
+					} else if(board[y][x] == 'T' && !debug) {
+						cout << "  ";
 					} else {
 						cout << " " << board[y][x];
 					}
@@ -588,6 +590,28 @@ void Board::addTraps() {
 	 * saps from the dog is determined in the moveDog method when the dog moves on a Trap.
 	 */
 
+	int traps;
+	switch(level) {
+		case 'e':
+			traps = 6;
+			break;
+		case 'm':
+			traps = 8;
+			break;
+		case 'h':
+			traps = 10;
+			break;
+	}
+
+	int x;
+	int y;
+	for(int i = 0; i < traps; i++) {
+		do {
+			x = rand() % size;
+			y = rand() % size;
+		} while (board[y][x] != ' ');
+		board[y][x] = 'T';
+	}
 
 }
 
