@@ -33,7 +33,6 @@ void Board::InitAll() {
 	// First:  Write and test printBoard following the instructions inside of
 	// the printBoard Method below.  Then test it to make sure it's working
 	// properly.
-	cout << "starty: " << starty << " endy: " << endy << endl;
 	printBoard();
 	// Your output should be this:
 	//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
@@ -450,16 +449,16 @@ void Board::printBoard() {
 					// board characters
 					if(board[y][x] == '|') {
 						// wall 1
-						cout << "🌳🌳";
+						cout << "🌳";
 					} else if(board[y][x] == '-') {
 						// wall 2
-						cout << "🌲🌲";
+						cout << "🌲";
 					} else if(board[y][x] == 'F') {
 						// food
-						cout << " 🍗";
+						cout << "🍗";
 					} else if(board[y][x] == 'T') {
 						// trap
-						cout << " 🪤";
+						cout << "🪤";
 					} else {
 						cout << " " << board[y][x];
 					}
@@ -472,40 +471,77 @@ void Board::printBoard() {
 }
 
 void Board::boardConfig() {
-	//(8 pts)
-	//Instructions for writing boardConfig:
-	/* this method and the moveDog method are probably the longest methods.
-	 * This method first puts dummy values in every square (I used '+' - I just didn't want
-	 * every square to have gibberish, so I chose a character I wasn't using for any other
-	 * purpose and initialized every square to have that value).
-	 * I then added my random horizontal and vertical walls.
-	 *
-	 * Here's how I did it the walls:
-	 *
-	 * I only placed walls in the odd numbered rows and columns (in other words, row one might
-	 * have a row, but then row 2 would not, whereas row three could and row 4 could not.
-	 * Same with columns (although you can have flexibility.
-	 *
-	 * I picked an odd row or column that did not already have a wall in it at all.
-	 *
-	 * I generated a total of 10 walls.
+	
+	// put "dummy values" in each square
+	int y;
+	int x;
+	for(y = 0; y < 20; y++) {
+		for(x = 0; x < 20; x++) {
+			board[y][x] = ' ';
+		}
+	}
 
-	 * For each wall, I picked randomly for vertical or horizontal (just rand() % 2 to get either
-	 * 0 for vertical, 1 for horizontal.
-	 *
-	 * I set the easy version to have at most 9 squares in a row or column as a wall, the
-	 * medium to have at most 13 squares as walls in a row or column, and the hard version to
-	 * have at most 16 squares per row or column.(but you can play with this because sometimes
-	 * the hard version was seriously hard!!!
-	 *
-	 * Let's say I randomly decided to place a wall in row 3.  I then randomly chose 9 squares in
-	 * row 3 to be a wall (if it was the easy version, 13 if it was the medium, and 16 if it was
-	 * the hard)
-	 *
-	 * So that's the walls.  Then I added the 'D' to the beginning square nad an 'E' to the end square.
-	 *
-	 *
-	 */
+
+	// there will be 12 walls total; randomly select how many will be vertical/horizontal with at least 2 on each axis
+	int horizontal = (rand() % 10) + 2;
+	int vertical = 12 - horizontal;
+
+	// add horizontal walls
+	int i;
+	int j;
+	int length;
+	float positionRange = 10.0 / horizontal;
+	int position[2] = {0, 0};
+	cout << "rows: " << horizontal << "; columns: " << vertical << "; positionRange: " << positionRange << endl;
+	for(i = 0; i < horizontal; i++) {
+		// select wall length (at least 3 in length, longer lengths & higher probability of longer lengths with harder levels)
+		switch(level) {
+			case 'e':
+				length = (rand() % 6) + 3;
+				break;
+			case 'm':
+				length = (rand() % 8) + 5;
+				break;
+			case 'h':
+				length = (rand() % 10) + 6;
+				break;
+		}
+
+		// select wall position
+		position[0] = (positionRange * i) * 2;
+		position[1] = rand() % 20;
+
+		// add wall (wall will wrap if too long)
+		for(j = 0; j < length; j++) {
+			board[position[0]][(position[1] + j) % 20] = '-';
+		}
+	}
+
+	// add vertival walls
+	positionRange = 10.0 / vertical;
+	for(i = 0; i < vertical; i++) {
+		// select wall length (always at least length 3 cause I kept getting short walls)
+		switch(level) {
+			case 'e':
+				length = (rand() % 6) + 3;
+				break;
+			case 'm':
+				length = (rand() % 10) + 3;
+				break;
+			case 'h':
+				length = (rand() % 13) + 3;
+				break;
+		}
+
+		// select wall position
+		position[0] = (positionRange * i) * 2;
+		position[1] = rand() % 20;
+
+		// add wall (wall will wrap if too long)
+		for(j = 0; j < length; j++) {
+			board[(position[1] + j) % 20][position[0] + 1] = '|';
+		}
+	}
 
 }
 
