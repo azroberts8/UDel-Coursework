@@ -652,7 +652,32 @@ bool Board::moveDog(char c) {
 		 * fields correctly!
 		 *
 		 */
+	
+		// calculate new coordinates
+		int tempX = mydog.x;
+		int tempY = mydog.y;
+		switch(c) {
+			case 'u':
+				tempY -= 1;
+				break;
+			case 'd':
+				tempY += 1;
+				break;
+			case 'l':
+				tempX -= 1;
+				break;
+			case 'r':
+				tempX += 1;
+				break;
+		}
 
+		// check if new coordinates are in bounds
+		if(tempX >= 0 && tempX < 20 && tempY >= 0 && tempX < 20) {
+			// move is in bounds
+			
+		} else {
+			// move is out of bounds
+		}
 
 
 }
