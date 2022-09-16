@@ -38,11 +38,10 @@ void Board::InitAll() {
 		char c;
 		cin >> c;
 		level = c;
-		starty = rand() % size;
-		startx = 0;
-		endy = rand() % size;
-		endx = size-1;
-
+		startx = rand() % size;
+		starty = 0;
+		endx = rand() % size;
+		endy = size-1;
 		mydog.x = startx;
 		mydog.y = starty;
 		boardConfig();
@@ -50,7 +49,6 @@ void Board::InitAll() {
 		addTraps();
 		printBoard();
 		playGame();
-
 		cout << "Play again? " << endl;
 		string s = "no";
 		cin>>s;
@@ -177,7 +175,7 @@ void Board::printBoard() {
 }
 
 void Board::boardConfig() {
-	
+
 	// put "dummy values" in each square
 	int y;
 	int x;
@@ -266,10 +264,14 @@ void Board::addFood() {
 		case 'h':
 			treats = size - 4;
 			break;
+		default:
+			treats = size;
 	}
 
 	int x;
 	int y;
+
+
 	for(int i = 0; i < treats; i++) {
 		do {
 			x = rand() % size;
@@ -311,6 +313,7 @@ bool Board::moveDog(char c) {
 		// calculate new coordinates
 		int tempX = mydog.x;
 		int tempY = mydog.y;
+		int rand_number;
 		switch(c) {
 			case 'u':
 				tempY -= 1;
@@ -391,5 +394,3 @@ void Board::playGame() {
 
 
 }
-
-
