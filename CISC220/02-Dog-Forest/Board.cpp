@@ -38,10 +38,10 @@ void Board::InitAll() {
 		char c;
 		cin >> c;
 		level = c;
-		startx = rand() % size;
-		starty = 0;
-		endx = rand() % size;
-		endy = size-1;
+		starty = rand() % size;
+		startx = 0;
+		endy = rand() % size;
+		endx = size-1;
 		mydog.x = startx;
 		mydog.y = starty;
 		boardConfig();
