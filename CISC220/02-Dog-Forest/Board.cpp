@@ -26,7 +26,7 @@ void Board::InitAll() {
 	bool keepPlaying = true;
 	
 	while (keepPlaying) {
-		cout << "Would you like to use emoji characters? (May effect character spacing) [Y/n]" << endl;
+		cout << "Would you like to use special styling? (May effect character spacing) [Y/n]" << endl;
 		char e;
 		cin >> e;
 		if(e == 'Y' || e == 'y') {
@@ -47,7 +47,7 @@ void Board::InitAll() {
 		boardConfig();
 		addFood();
 		addTraps();
-		printBoard();
+		if(emojis) cout << "\x1B[2J\x1B[H" << endl;
 		playGame();
 		cout << "Play again? " << endl;
 		string s = "no";
@@ -371,11 +371,15 @@ bool Board::moveDog(char c) {
 				board[tempY][tempX] = ' ';
 			}
 
-			return mydog.changeStrength(amt);
+			bool cont = mydog.changeStrength(amt);
+			if(cont && emojis) cout << "\x1B[2J\x1B[H" << endl;
+			return cont;
 		} else if(tempX == size && tempY == endy) {
 			// entering the end zone
 			mydog.won();
 			return false;
+		} else {
+			return false; // to suppress warning
 		}
 
 
@@ -385,11 +389,11 @@ bool Board::moveDog(char c) {
 void Board::playGame() {
 	bool play = true;
 	while (play) {
+		printBoard();
 		cout << "Move (u, d, l, r) "<<endl;
 		char c;
 		cin >> c;
 		play = moveDog(c);
-		printBoard();
 	}
 
 

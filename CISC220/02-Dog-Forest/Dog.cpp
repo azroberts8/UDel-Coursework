@@ -30,7 +30,7 @@ Dog::Dog()
 bool Dog::changeStrength(int amt)
 {
 	strength += amt;
-	printDog();
+	//printDog();
 
 	if(strength > 0){
 		return true;
