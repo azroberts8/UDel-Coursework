@@ -15,6 +15,8 @@ using namespace std;
 
 class Board {
 	int size = 20;  //the square board's size
+	bool emojis = true; // use emojis for rendering board (set to false if encountering character spacing issues)
+
 	char board[20][20]= {{'0','1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9'},
 			{'1','2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0'},
 			{'2','3','4','5','6','7','8','9','0','1','2','3','4','5','6','7','8','9','0','1'},
