@@ -24,314 +24,23 @@ Board::Board(char diff, string name, bool d) {
 }
 void Board::InitAll() {
 	bool keepPlaying = true;
-	/*********************************************************************/
-	//FOR TESTING!!!
-	// Here's where there's code for getting your initial methods working
-	// Once you've got this part working, you can comment it out and then
-	// just play the game.
-	//
-	// First:  Write and test printBoard following the instructions inside of
-	// the printBoard Method below.  Then test it to make sure it's working
-	// properly.
-	printBoard();
-	// Your output should be this:
-	//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-	//		| 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 |
-	//		| 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 |
-	//		| 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 |
-	//		| 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 |
-	//		| 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 |
-	//		| 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 |
-	//		| 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 |
-	//		| 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 |
-	//		| 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 |
-	//		| 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 |
-	//		| 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 |
-	//		| 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 |
-	//		| 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 |
-	//		| 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 |
-	//		| 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 |
-	//		| 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 |
-	//		| 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 |
-	//		| 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 |
-	//		| 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 |
-	//		| 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 |
-	//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-	//
-	//
-	// Next:
-	// Write the boardConfig Method using the instructions inside the BoardConfig
-	// method below, and then test it.
-	startx = 1;
-	starty = 0;
-	endx = 1;
-	endy = size-1;
-	boardConfig();
-	printBoard();
-	// Your results should look something like the following (walls are random, so
-	// yours will be unique:
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|   |                           |   |     |
-//		->D     |               |       |       E ->
-//		|                       |       |   |     |
-//		|               |               |   |     |
-//		|   |   |       |       |                 |
-//		|   |   |         _ _ _   _ _ _ _     _ _ |
-//		|       |       |                         |
-//		|   |           |               |         |
-//		|   |                   |           |     |
-//		|   _ _ |     _ _ _ _ _ _           | _   |
-//		|       |               |       |         |
-//		|   |   |                       |   |     |
-//		|               |       |                 |
-//		|   _     _ _   | _ _ _ |   _   _   _     |
-//		|   |           |               |         |
-//		|                                   |     |
-//		|   |           |       |           |     |
-//		|   |   |                                 |
-//		|                       |                 |
-//		|       |       |               |   |     |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//
-	//
-	// Next, let's write the addFood method to add food and print the board:
-	level = 'e';
-	addFood();
-	printBoard();
-	cout << "***************************************" << endl;
-	boardConfig();
-	level = 'm';
-	addFood();
-	printBoard();
-	cout << "***************************************" << endl;
-	boardConfig();
-	level = 'h';
-	addFood();
-	printBoard();
-	cout << "***************************************" << endl;
-	// OUTPUT Should be something like this (note the different number of Food
-	// items depending on the differing level of difficulty):
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|       | F               F         |     |
-//		->D     _ _ _ _ _ _ _ _   _   _     _   E ->
-//		|       |   |                 F     |     |
-//		|       |   |           F           |     |
-//		|       |   |                 F     |     |
-//		|       |   |                       | F   |
-//		|     F |   |                 F           |
-//		| _ _ _ | _ | _ F   _   _ _ _   _ _ _ _   |
-//		|       |                           |     |
-//		| _ _   _ _ | _ _ _ _ _   _ _     _ _   F |
-//		|                                   |     |
-//		| _ _ _   _ | _     _ _   _ F _ _ _ _   _ |
-//		|           |                     F |     |
-//		| _ _ _ |   |   _ _ _ _ _ _     _ _ _   _ |
-//		|                 F                 |     |
-//		| _ _   | _ | _     _   _ _ _ _ _ _ _ _   |
-//		|       |   |         F F         F |     |
-//		|       |       F                   |     |
-//		|         F                         |     |
-//		|     F |   |   F                   |     |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-//
-//
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|                               |   |   F |
-//		->D _ _       _ _   | _     | _ _       E ->
-//		|       |           |                     |
-//		|                   |           |   |   F |
-//		|       |                                 |
-//		| _ F     _ _ _       F _ _ F _ | _     _ |
-//		|       |           |       |       |     |
-//		| _ _   _   F _ _     _   _ _   | _ |     |
-//		|       |               F   |   |   |     |
-//		|       |   F                       |     |
-//		|                   |   F   |           F |
-//		| _     _   _   _         _ | _ _ _ _ F   |
-//		|       |   F       |       |   |   |     |
-//		|       |           |       |   |       F |
-//		|                           |       |   F |
-//		|       |           |                     |
-//		|     F             |     F   F |   |     |
-//		|                               |         |
-//		|       |                   |             |
-//		| F                                       |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-//
-//
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|       F       F           |             |
-//		->D _ _ _       _     _ _ _ | _ _ _ _ _ E ->
-//		|       |                   |             |
-//		|                                 F       |
-//		|       |                   |   F         |
-//		| _   _ | _ _ _ _   _ _ _ _ _ _       _   |
-//		|       |                   |             |
-//		|     _ | _ _   _ _ _ _ _ _ | _     _ _ _ |
-//		|       |                   |       F     |
-//		| _   _ _ _   _     _   _ _ | _ _ _   _ _ |
-//		|       |               F   |             |
-//		| _ _   | _ _     _ F _   _ _ _ _ _ _   _ |
-//		|     F |                                 |
-//		|       |                   | F           |
-//		|                     F     |             |
-//		| _ _   | _   _   _ _ _ _ _ _ _   _ _     |
-//		|       |               F   | F           |
-//		| _ _   |   _ _ _ _   _ _ _ _ _ _   _     |
-//		|     F       F                           |
-//		|                   F     F |             |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-
-	//Once you have this working, you must add the traps. Write the addTraps
-	// method, as described below.  Your output should be as follows:
-
-
-	level = 'e';
-	addFood();
-	addTraps();
-	printBoard();
-	cout << "***************************************" << endl;
-	boardConfig();
-	level = 'm';
-	addFood();
-	addTraps();
-	printBoard();
-	cout << "***************************************" << endl;
-	boardConfig();
-	level = 'h';
-	addFood();
-	addTraps();
-	printBoard();
-	cout << "***************************************" << endl;
-	// Your output should look something like this:
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|           F F   F | F | F   F     |     |
-//		->D   _ _ _ _       _ _ _     _ _ _ _ _ E ->
-//		|   F     F         |   |           |     |
-//		|     F       T     |           F   |     |
-//		|   F   |           |     T               |
-//		|   _   | _     _ _ _ _ _ _ _ _     _ _ _ |
-//		|             F     |   |           |     |
-//		| _ _ _ | F _     _ | _ _ _ _   _   _ _ _ |
-//		|       |       T       |         T | F   |
-//		|             F     F   |           |     |
-//		|   F   |           | F |     F     |     |
-//		|       |   F   F   |   |   T F     | T   |
-//		|     F | F     F       |           |     |
-//		| _ _ _ | _   _ _ _ F _ | _   _   _ _ _   |
-//		|       | F         | F |                 |
-//		| _ _ _ | _ _ _ _ _ |   _ _     _     _ _ |
-//		|       |               |           |     |
-//		| T F   | F         |   |       F F |     |
-//		| T     |           |         F     |     |
-//		|   F     F T       |   |   F T     |     |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-//
-//
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|       |       F       |                 |
-//		->D _ _ _   | _   _ | _     T   _   _   E ->
-//		| T         |       |         T |   | T   |
-//		|   F   |   |     F   F         |         |
-//		|           |           |     T           |
-//		|       | F         |           |   |     |
-//		|                   |   |       |   | F   |
-//		| _ F _       _ F   | _ F   _   _ _ | _ _ |
-//		|       |                   F             |
-//		|                   |   | T     |   |     |
-//		|       |           |           |   F     |
-//		|       |   |       T                     |
-//		|             F         |               T |
-//		| _     | _ |     _ _ _   _   _ _ _ |     |
-//		|           |           |       F       F |
-//		|           |           |       | T       |
-//		|       | T |       |               |   F |
-//		|       |     T     |   |     F     F     |
-//		|                       F       |   |     |
-//		|                       |       | T |     |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-//
-//
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//		|   |       F   |   F   T       |   |     |
-//		->D |           |   T       |           E ->
-//		|                         T     |   |     |
-//		| _ |   _ _     _ _ _ _     _   _ _ _ _ _ |
-//		|   |           |           |   |   |     |
-//		| _ | _ _   _ _ _ _ _ _ _   _   _   | F _ |
-//		|   | F         | T         F   |         |
-//		|   |     F     |           |   |   | T   |
-//		|   |           |   T       |   |   |     |
-//		|   |   _ _   _ _ _ _ _ _ _ _   _ _ _     |
-//		|     T   F T   |     F     |   |         |
-//		| _ | _ _ T _ _ |   _ _ _ _ |   _ _   _ _ |
-//		| F | T         |           |   |   |     |
-//		|             F     T               |     |
-//		|                     T     |   |   |     |
-//		|   |     T     |           | F |   |     |
-//		|   |           |         F | F |   |   F |
-//		|         T           F     |   |     F   |
-//		|               |           |       |     |
-//		|               |           |   |   |     |
-//		 _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
-//	***************************************
-//
-// ****************************************************************************
-//  Part 2:
-//  Dog.hpp and Dog.cpp
-// *****************************************************************************
-//	Now you'll have to write the Dog class and header file before you can write'
-//	and test the moveDog method.
-//  The instructions for this are below the Board.hpp and Board.cpp files in the
-//  lab instructions.
-//	Once you are done writing the Dog class and header, you'll need to do the '
-//	uncomment out (comment in?) the following
-//	 * 1) in the .hpp class, you'll have to comment in the Dog myDog line Board.hpp
-//	 * (it's around line 47)
-//	 * 2) In the 3rd Board Constructor, you'll need to comment in the mydog.name line
-//	 *  (it's around line 37 in this file)
-//	 * 3) And you'll have add to your printBoard method a line for printing out
-//	 *    the dog object's name and the dog object's strength.
-//
-// And now write moveDog() as described inside the  moveDog method, below.
-// Once done, uncomment out the following 4 lines and test with the following code:
-//	moveDog('d');
-//	moveDog('u');
-//	moveDog('r');
-//	moveDog('l');
-	// your dog should move down, up, right, and then left.  If you hit a food
-	// or a trap, you should get a message as described in the moveDog method, below.
-
-
-
-
-
-	/*********************************************************************/
-	//End of Testing.  Now comment out the above testing stuff, and
-	// comment in the rest of the init method, below
-	/*********************************************************************/
-
+	
 
 	/**********************************************************************/
 	/* PART THREE
 	 * COMMENT OUT THE ABOVE TESTING CODE AND COMMENT IN THE BELOW CODE TO RUN
 	 * THE GAME.
 	 */
-	/*
+	
 	while (keepPlaying) {
 		cout << "What level of difficulty do you want (e, m, or h)?" << endl;
 		char c;
 		cin >> c;
 		level = c;
-		startx = rand() % size;
-		starty = 0;
-		endx = rand() % size;
-		endy = size-1;
+		starty = rand() % size;
+		startx = 0;
+		endy = rand() % size;
+		endx = size-1;
 
 		mydog.x = startx;
 		mydog.y = starty;
@@ -353,7 +62,7 @@ void Board::InitAll() {
 			keepPlaying = false;
 		}
 	}
-	*/
+	
 }
 
 
@@ -447,7 +156,9 @@ void Board::printBoard() {
 					}
 				} else {
 					// board characters
-					if(board[y][x] == '|') {
+					if(x == mydog.x && y == mydog.y) {
+						cout << "🐶";
+					} else if(board[y][x] == '|') {
 						// wall 1
 						cout << "🌳";
 					} else if(board[y][x] == '-') {
@@ -677,8 +388,48 @@ bool Board::moveDog(char c) {
 		if(tempX >= 0 && tempX < 20 && tempY >= 0 && tempX < 20) {
 			// move is in bounds
 
-		} else {
-			// move is out of bounds
+			int amt = 0;
+			bool move = false;
+			if(board[tempY][tempX] == '|' || board[tempY][tempX] == '-') {
+				// has hit a wall
+				if(mydog.strength > 6) {
+					char input;
+					cout << "You have hit a wall, would you like to break it? ";
+					cin >> input;
+
+					if(input == 'y' || input == 'Y') {
+						amt = -1 * wallStrength;
+						move = true;
+					} else {
+						amt = -1;
+					}
+				} else {
+					amt = -1;
+				}
+			} else if(board[tempY][tempX] == 'T') {
+				// has landed on a trap
+				amt = -1 * ((rand() % 16) + 2);
+				move = true;
+			} else if(board[tempY][tempX] == 'F') {
+				// has landed on food
+				amt = (rand() % 16) + 2;
+				move = true;
+			} else {
+				// normal move
+				amt = -2;
+				move = true;
+			}
+
+			if(move) {
+				mydog.x = tempX;
+				mydog.y = tempY;
+				board[tempY][tempX] = ' ';
+			}
+
+			return mydog.changeStrength(amt);
+		} else if(tempX == size && tempY == endy) {
+			// entering the end zone
+			mydog.won();
 		}
 
 
