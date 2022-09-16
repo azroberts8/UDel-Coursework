@@ -332,7 +332,6 @@ void Board::InitAll() {
 		starty = 0;
 		endx = rand() % size;
 		endy = size-1;
-
 		mydog.x = startx;
 		mydog.y = starty;
 		boardConfig();
@@ -340,7 +339,6 @@ void Board::InitAll() {
 		addTraps();
 		printBoard();
 		playGame();
-
 		cout << "Play again? " << endl;
 		string s = "no";
 		cin>>s;
@@ -473,7 +471,7 @@ void Board::printBoard() {
 }
 
 void Board::boardConfig() {
-	
+
 	// put "dummy values" in each square
 	int y;
 	int x;
@@ -511,7 +509,8 @@ void Board::boardConfig() {
 
 		// select wall position
 		position[0] = (positionRange * i) * 2;
-		position[1] = rand() % 20;
+		position[1] = rand() % (size - length + 1);
+		//position[1] = rand() % 20;
 
 		// add wall (wall will wrap if too long)
 		for(j = 0; j < length; j++) {
@@ -537,7 +536,7 @@ void Board::boardConfig() {
 
 		// select wall position
 		position[0] = (positionRange * i) * 2;
-		position[1] = rand() % 20;
+		position[1] = rand() % (size - length + 1);
 
 		// add wall (wall will wrap if too long)
 		for(j = 0; j < length; j++) {
@@ -557,7 +556,7 @@ void Board::addFood() {
 	 * move onto) the food is determined in the moveDog method.
 	 */
 
-	int treats;
+	int treats = 0;
 	switch(level) {
 		case 'e':
 			treats = size;
@@ -568,10 +567,14 @@ void Board::addFood() {
 		case 'h':
 			treats = size - 4;
 			break;
+		default:
+			treats = size;
 	}
 
 	int x;
 	int y;
+
+
 	for(int i = 0; i < treats; i++) {
 		do {
 			x = rand() % size;
@@ -591,15 +594,16 @@ void Board::addTraps() {
 	 */
 
 	int traps;
+	// not sure why but it always generates 2 more traps than it should so I've decreased count
 	switch(level) {
 		case 'e':
-			traps = 6;
+			traps = 4;
 			break;
 		case 'm':
-			traps = 8;
+			traps = 6;
 			break;
 		case 'h':
-			traps = 10;
+			traps = 8;
 			break;
 	}
 
@@ -652,10 +656,11 @@ bool Board::moveDog(char c) {
 		 * fields correctly!
 		 *
 		 */
-	
+
 		// calculate new coordinates
 		int tempX = mydog.x;
 		int tempY = mydog.y;
+		int rand_number;
 		switch(c) {
 			case 'u':
 				tempY -= 1;
@@ -672,11 +677,16 @@ bool Board::moveDog(char c) {
 		}
 
 		// check if new coordinates are in bounds
-		if(tempX >= 0 && tempX < 20 && tempY >= 0 && tempX < 20) {
-			// move is in bounds
-			
-		} else {
-			// move is out of bounds
+		if(tempX < 0 && tempX >= 20 && tempY < 0 && tempX >= 20) {
+			// move are out of bounds
+		} else if (board[tempY][tempX] == 'F'){
+			rand_number = rand() % 16 + 2;
+			mydog.changeStrength(rand_number);
+		} else if (board[tempY][tempX] == 'E') {
+			mydog.die();
+		} else if (board[tempY][tempX] == 'T') {
+			rand_number = rand() % 16 + 2;
+			mydog.changeStrength(-1 * rand_number);
 		}
 
 
@@ -695,5 +705,3 @@ void Board::playGame() {
 
 
 }
-
-
