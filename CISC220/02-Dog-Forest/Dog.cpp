@@ -34,8 +34,9 @@ bool Dog::changeStrength(int amt)
 
 	if(strength > 0){
 		return true;
-	}else{
+	} else {
 		die();
+		return false;
 	}
 }// end of changeStrength function
 

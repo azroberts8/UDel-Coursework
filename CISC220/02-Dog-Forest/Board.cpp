@@ -25,30 +25,23 @@ Board::Board(char diff, string name, bool d) {
 void Board::InitAll() {
 	bool keepPlaying = true;
 	
-
-	/**********************************************************************/
-	/* PART THREE
-	 * COMMENT OUT THE ABOVE TESTING CODE AND COMMENT IN THE BELOW CODE TO RUN
-	 * THE GAME.
-	 */
-	
 	while (keepPlaying) {
+		cout << "Would you like to use emoji characters? (May effect character spacing) [Y/n]" << endl;
+		char e;
+		cin >> e;
+		if(e == 'Y' || e == 'y') {
+			emojis = true;
+		} else {
+			emojis = false;
+		}
 		cout << "What level of difficulty do you want (e, m, or h)?" << endl;
 		char c;
 		cin >> c;
 		level = c;
-<<<<<<< HEAD
 		startx = rand() % size;
 		starty = 0;
 		endx = rand() % size;
 		endy = size-1;
-=======
-		starty = rand() % size;
-		startx = 0;
-		endy = rand() % size;
-		endx = size-1;
-
->>>>>>> 3fed926cfd5c72ec283fbac85a69c703d53b7389
 		mydog.x = startx;
 		mydog.y = starty;
 		boardConfig();
@@ -77,24 +70,8 @@ void Board::InitAll() {
 /***********************************************************************/
 
 void Board::printBoard() {
-	//(8 pts)
-	//Instructions for this method:
-//	 this method first uses the dog's printDog method to print out info
-//	 about the dog, and then it prints out the board as follows:
-//	 *
-//	 This method prints out hte board such that it looks like a board.  It
-//	 prints a blank space for any square (for squares that do not have
-//	 food, traps, walls, the dog, and aren't the beginning or the ending.
-//   (at first, there will be no food or traps, or even walls or dog, but we
-//   will be adding food as 'F' character, traps as 'T' character, walls as
-//   '|' or '_' characters, and the dog 'D' character to the board, so you want
-//   to print a space for everything that isn't a 'T','F','|','_',or'D'.
-//	 Otherwise it prints out the character in the square. Note that I printed a
-//	 border around the entire board so it was easier to look at, and, equally,
-//	 I placed an -> arro (thats a minus and a greater than sign) in the border
-//	 for where the beginning of the game was and where the end of the game was.
 
-	mydog.printDog();  // COMMENT THIS IN WHEN YOU Write your Dog class!!
+	mydog.printDog();
 
 	// this is about to get messy; I wouldn't even suggest trying to understand it
 	for(int y = -1; y < size + 1; y++) {
@@ -163,19 +140,27 @@ void Board::printBoard() {
 				} else {
 					// board characters
 					if(x == mydog.x && y == mydog.y) {
-						cout << "🐶";
-					} else if(board[y][x] == '|') {
+						if(emojis) {
+							cout << "🐶";
+						} else {
+							cout << " D";
+						}
+						
+					} else if(board[y][x] == '|' && emojis) {
 						// wall 1
 						cout << "🌳";
-					} else if(board[y][x] == '-') {
+					} else if(board[y][x] == '-' && emojis) {
 						// wall 2
 						cout << "🌲";
-					} else if(board[y][x] == 'F') {
+					} else if(board[y][x] == 'F' && emojis) {
 						// food
 						cout << "🍗";
-					} else if(board[y][x] == 'T' && debug) {
+					} else if(board[y][x] == 'T' && debug && emojis) {
 						// trap
 						cout << " ☠";
+					} else if(board[y][x] == 'T' && debug && !emojis) {
+						//trap
+						cout << " T";
 					} else if(board[y][x] == 'T' && !debug) {
 						cout << "  ";
 					} else {
@@ -267,13 +252,6 @@ void Board::boardConfig() {
 
 
 void Board::addFood() {
-	// (5 pts)
-	/* Instructions for writing addFood:
-	/* this method randomly adds food around the board.  For easy, I added the field size
-	 * number of foods randomly around the board.  For medium, I added size-2 foods, and for
-	 * hard I added size-4 foods.  The amount of strength the dog gets when they eat (aka
-	 * move onto) the food is determined in the moveDog method.
-	 */
 
 	int treats = 0;
 	switch(level) {
@@ -304,25 +282,17 @@ void Board::addFood() {
 }
 
 void Board::addTraps() {
-	// (5 pts)
-	//Instructions for addTraps
-	/* this method randomly adds traps around the board.  For easy I added size - 6 traps,
-	 * for medium, I added size - 8 traps, and for hard I added size - 10 traps.  Note: Traps are
-	 * only printed on the board when the game is in debug mode.  The amount of strength each trap
-	 * saps from the dog is determined in the moveDog method when the dog moves on a Trap.
-	 */
 
 	int traps;
-	// not sure why but it always generates 2 more traps than it should so I've decreased count
 	switch(level) {
 		case 'e':
-			traps = 4;
-			break;
-		case 'm':
 			traps = 6;
 			break;
-		case 'h':
+		case 'm':
 			traps = 8;
+			break;
+		case 'h':
+			traps = 10;
 			break;
 	}
 
@@ -340,42 +310,6 @@ void Board::addTraps() {
 
 
 bool Board::moveDog(char c) {
-	// (12 pts)
-	//Instructions for moveDog
-	/* This is a somewhat long method.
-		 * First, it determines the new coordinats of the dog, based on teh direction in which the
-		 * dog wants to move (based on what c holds - u is up, d is down, l is left, r is right).
-		 *
-		 * If the dog is at teh edge of the board, teh dog should not move
-		 *
-		 * If the dog moves over food, a random number between 2 and 17 is generated, and the
-		 * dog's changeStrength method is used to increase the dog's strength by the random amount.
-		 *
-		 * If the dog moves over the end of the board, the dog's won method is called and false is
-		 * returned from this method.
-		 *
-		 * If the dog moves over a Trap, a random number between 2 and 17 is generated and the dog's
-		 * changeStrength method is called with that negative number.  (Note that the changeStrength
-		 * method returns a boolean indicating whether the dog's strength has gone to 0 or less, and
-		 * thus the dog has died and the game is over. That boolean value is returned from this method).
-		 *
-		 * If the dog moves over a wall, the method checks to see if the dog has enough strength to
-		 * knock down the wall (I made it cost 6 strength points to knock down a wall).  If the dog
-		 * has enough strength, the user is asked, "Do you want to knock down that wall?"  If the user
-		 * responds "yes", then the wall is knocked down, the dog moves into that square, adn the dog's
-		 * strength decreases by 6.  If the answer is "no", the dog loses 1 strength point, just because.
-		 *
-		 * If the dog moves into a blank square, the dog loses 2 strength points using the changeStrength
-		 * method (which, again, will return false if the dog has lost all their strength and died.
-		 *
-		 * NOTE: I am not concerned with the precise rules here.  If you want to change the range of
-		 * random numbers for food, if you are worried about whether you still lose 2 strength points for
-		 * moving even though you gained points for moving over food - I'm leaving all that to your preference.
-		 * I am concerned that you are using classes, objects, and object methods and accessing object
-		 * fields correctly!
-		 *
-		 */
-
 		// calculate new coordinates
 		int tempX = mydog.x;
 		int tempY = mydog.y;
@@ -396,18 +330,6 @@ bool Board::moveDog(char c) {
 		}
 
 		// check if new coordinates are in bounds
-<<<<<<< HEAD
-		if(tempX < 0 && tempX >= 20 && tempY < 0 && tempX >= 20) {
-			// move are out of bounds
-		} else if (board[tempY][tempX] == 'F'){
-			rand_number = rand() % 16 + 2;
-			mydog.changeStrength(rand_number);
-		} else if (board[tempY][tempX] == 'E') {
-			mydog.die();
-		} else if (board[tempY][tempX] == 'T') {
-			rand_number = rand() % 16 + 2;
-			mydog.changeStrength(-1 * rand_number);
-=======
 		if(tempX >= 0 && tempX < 20 && tempY >= 0 && tempX < 20) {
 			// move is in bounds
 
@@ -453,7 +375,7 @@ bool Board::moveDog(char c) {
 		} else if(tempX == size && tempY == endy) {
 			// entering the end zone
 			mydog.won();
->>>>>>> 3fed926cfd5c72ec283fbac85a69c703d53b7389
+			return false;
 		}
 
 
