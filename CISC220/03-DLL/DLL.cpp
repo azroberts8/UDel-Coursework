@@ -61,22 +61,37 @@ DLL::DLL(int x){  // constructor, initializes a list with one new node with data
 	last = n;
 	size=1;
 }
-
-void DLL::push(){
-
-}
-
-int DLL::pop(){
-
-}
-
-void DLL::addAtFront(int x){
-
-}
 /***************************************************************************************************/
 /*Part 1																																		*/
 /***************************************************************************************************/
 /* write push, pop, addAtFront */
+
+void DLL::addFirst(int x) {
+	first = new DNode(x);
+}
+
+void DLL::addAtFront(int x) {
+	DNode* node = new DNode(x);
+	node->next = first;
+	first->prev = node;
+	first = node;
+}
+
+void DLL::push(int x) {
+	DNode* node = new DNode(x);
+	node->prev = last;
+	last->next = node;
+	last = node;
+}
+
+int DLL::pop() {
+	DNode* curr = last;
+	DNode* prev = curr->prev;
+	prev->next = NULL;
+	last = prev;
+
+	return curr->data;
+}
 
 /***************************************************************************************************/
 /*Part 2																																		*/
