@@ -29,7 +29,8 @@ int main() {
 //
 //	pointerfunc(&k);
 //	cout << k << endl;
-
+	
+	exit(0); // prevents a segmentation fault after completed execution -Andrew
 }
 
 void valuefunc(int x) {
