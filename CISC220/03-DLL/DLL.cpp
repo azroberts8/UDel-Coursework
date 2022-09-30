@@ -112,6 +112,54 @@ int DLL::pop() {
 /***************************************************************************************************/
 /* write insertAt, removeAtK  here */
 
+void DLL::insertAt(int ind, int x) {
+	if(size == 0) {
+		addFirst(x);
+	} else if(ind >= size) {
+		push(x);
+	} else if(ind == 0) {
+		addAtFront(x);
+	} else {
+		DNode* node = first;
+		for(int i = 0; i < ind; i++) {
+			node = node->next;
+		}
+		DNode* newNode = new DNode(x);
+		newNode->prev = node->prev;
+		newNode->next = node;
+		node->prev->next = newNode;
+		node->prev = newNode;
+		size++;
+	}
+}
+
+int DLL::removeAtK(int ind) {
+	if(size <= 0 || ind >= size) return 0; // protects from out of bounds
+
+	DNode* node = first;
+	if(ind == 0) {
+		// first element
+		if(node->next != NULL) {
+			first = node->next;
+			node->next->prev = NULL;
+		} else {
+			first = NULL;
+		}
+	} else if(ind == size-1) {
+		// last element
+		return pop();
+	} else {
+		// any element in between
+		for(int i = 0; i < ind; i++) {
+			node = node->next;
+		}
+		node->prev->next = node->next;
+		node->next->prev = node->prev;
+	}
+
+	size--;
+	return node->data;
+}
 
 /****************************************************************************************/
 /* Part 3                                                                                                                       */
