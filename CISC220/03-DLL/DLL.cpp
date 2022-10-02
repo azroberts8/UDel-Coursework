@@ -164,25 +164,20 @@ int DLL::removeAtK(int ind) {
 /****************************************************************************************/
 /* Part 3                                                                                                                       */
 /****************************************************************************************/
-void DLL::reverse(){
-	DNode* befNode = NULL;
-	DNode* aftNode = NULL;
-	DNode* currNode = first;
-	if (first->next == NULL || first == NULL){
-		first->next = first; 	
+
+void DLL::reverse() {
+	DNode* temp;
+	DNode* current = first;
+	first = last;
+	last = current;
+
+	while(current != NULL) {
+		temp = current->next;
+		current->next = current->prev;
+		current->prev = temp;
+		current = temp;
 	}
-	else{
-		while(currNode != NULL || currNode->next != NULL){
-		befNode = currNode->prev;
-		aftNode = currNode->next;
-		currNode->next = befNode;
-		currNode->prev = aftNode;
-		currNode = aftNode;
-		}		
-	} 
-	if (befNode != NULL){
-		first = aftNode->prev;
-	}
+
 }
 
 /****************************************************************************************/
