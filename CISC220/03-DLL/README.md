@@ -4,7 +4,7 @@ The second project of the semester in CISC220. For this assignment we will be im
 
 ### Authors:
 - Andrew Roberts (andrew@azroberts.com)
-- John Serino
+- John Serino (jhserino@udel.edu)
 
 ### Committing Guidelines
 - Avoid committing directly to master!

@@ -1,7 +1,7 @@
 /*
  * DLL.hpp
  *
- *      Author: 13027
+ *      Author: Andrew Roberts & John Serino
  */
 
 #ifndef DLL_HPP_
