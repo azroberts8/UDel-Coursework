@@ -184,6 +184,21 @@ void DLL::reverse() {
 /* Part 4                                                                                                                       */
 /****************************************************************************************/
 /* write removeX here */
+
+void DLL::removeX(int x, int* ind) {
+
+	*ind = 0;
+	DNode* node = first;
+	while(*ind < size && node->data != x) {
+		node = node->next;
+		*ind = *ind + 1;
+	}
+
+	if(*ind < size) {
+		removeAtK(*ind);
+	}
+
+}
 	
 	
 /****************************************************************************************/
