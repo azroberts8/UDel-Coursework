@@ -30,7 +30,7 @@ public:
 	void reverse();  // reverse the list
 	void removeX(int x, int *ind); // removes the first occurrence of x from the list and, using
 	//call by pointer, sets ind to be the index of the first occurrence of x in the list.
-	//void skip(bool flag);  // removes every other node as follows:
+	void skip(bool flag);  // removes every other node as follows:
 	//if the flag is true, the first, third, fifth, etc. nodes are removed
 	//if the flag is false, the second,fourth,sixth, etc. nodes are removed
 	void printList();

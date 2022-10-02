@@ -83,7 +83,6 @@ void DLL::addAtFront(int x) {
 
 void DLL::push(int x) {
 	DNode* node = new DNode(x);
-
 	if(first == NULL) {
 		first = node;
 		last = node;
@@ -95,16 +94,20 @@ void DLL::push(int x) {
 	size++;
 }
 
-
 int DLL::pop() {
 	DNode* node = last;
-	DNode* prev = node->prev;
-	if(prev != NULL) prev->next = NULL;
-	last = prev;
-	if(size == 1) first = NULL;
-	size--;
 
-	return node->data;
+	if(node == first) {
+		first = NULL;
+		last = NULL;
+		size = 0;
+		return node->data;
+	} else {
+		last = node->prev;
+		last->next = NULL;
+		size--;
+		return node->data;
+	}
 }
 
 /***************************************************************************************************/
@@ -205,6 +208,30 @@ void DLL::removeX(int x, int* ind) {
 /* Part 5                                                                                                                     */
 /****************************************************************************************/
 /* write skip here */
+
+void DLL::skip(bool flag) {
+	DNode* current;
+	if(flag) {
+		current = first->next;
+		first = current;
+	} else {
+		current = first;
+	}
+	while(current != NULL) {
+		if(current->next != NULL) {
+			current->next = current->next->next;
+		} else {
+			current->next = NULL;
+		}
+		if(current->prev != NULL) {
+			current->prev = current->prev->prev;
+		} else {
+			current->prev = NULL;
+		}
+		last = current;
+		current = current->next;
+	}
+}
 
 
 
