@@ -11,7 +11,7 @@
 using namespace std;
 
 class Student {
-	friend class bstNode;
+	friend class BSTNode;
 	friend class TreeInterface;
 	friend class bst;
 	string first;

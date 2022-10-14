@@ -34,13 +34,13 @@ void TreeInterface::Interface() {
 			cout << "Enter First: "<<endl;
 			string f;
 			cin >> f;
-			bstNode *t = tree->find(l,f);
+			BSTNode *t = tree->find(l,f);
 			if (t == NULL) {
 				char k;
 				cout << f << " " << l <<" not found in database.  " << endl;
 			}
 			else {
-				bstNode *s = tree->find(l,f);
+				BSTNode *s = tree->find(l,f);
 				//s->printNode();
 			}
 			break;
@@ -64,7 +64,7 @@ void TreeInterface::Interface() {
 				cout << endl <<fname << "\t" << lname<< " inserted successfully "<<endl;
 			}
 			else {
-				bstNode *t = tree->find(lname,fname);
+				BSTNode *t = tree->find(lname,fname);
 				t->printNode();
 				cout << "... already in tree with " << endl;
 			}
@@ -77,7 +77,7 @@ void TreeInterface::Interface() {
 			cout << "Enter First: "<<endl;
 			string f;
 			cin >> f;
-			bstNode *t = tree->remove(l,f);
+			BSTNode *t = tree->remove(l,f);
 			if (t == NULL) {
 				cout << endl << f << " " << l << " not in tree " << endl;
 			}

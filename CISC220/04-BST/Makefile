@@ -2,13 +2,13 @@ CC=gcc
 CCFLAGS=-lstdc++
 
 all:
-	$(CC) -o DLL *.cpp $(CCFLAGS)
+	$(CC) -o BST *.cpp $(CCFLAGS)
 
 run: all
-	./DLL
+	./BST
 
 clean:
-	rm -f ./DLL
+	rm -f ./BST
 
 rebuild:
 	make clean
