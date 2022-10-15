@@ -6,7 +6,46 @@
 using namespace std;
 
 bool bst::insert(string f, string l, int n, string j) {
+    BSTNode* node = new BSTNode(f, l, n, j);
+    node->left = NULL;
+    node->right = NULL;
+    
+    int cmp;
+    bool side;
+    BSTNode* next = root;
+    while(next != NULL) {
+        node->parent = next;
+        cmp = next->student->last.compare(l);
 
+        if(cmp == 0) {
+            // last names are equal; use first names
+            if(next->student->first.compare(f) < 0) {
+                next = next->left;
+                side = false;
+            } else {
+                next = next->right;
+                side = true;
+            }
+        } else if(cmp < 0) {
+            next = next->left;
+            side = false;
+        } else {
+            next = next->right;
+            side = true;
+        }
+        node->height += 1;
+    }
+
+    if(node->parent == NULL) {
+        // this is the first element
+        root = node;
+    } else if(side) {
+        node->parent->right = node;
+    } else {
+        node->parent->left = node;
+    }
+    
+    return true; // I'm not sure how this could "fail" to insert the data?
 }
 
 BSTNode* bst::find(string l, string f) {
