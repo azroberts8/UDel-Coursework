@@ -49,7 +49,18 @@ bool bst::insert(string f, string l, int n, string j) {
 }
 
 BSTNode* bst::find(string l, string f) {
-
+    BSTNode* node = root;
+    while(node != NULL) {
+        if(l.compare(node->student->last) == 0 && f.compare(node->student->first)) {
+            // first and last name are a match
+            break;
+        } else if(l.compare(node->student->last) < 0 || (l.compare(node->student->last) == 0 && f.compare(node->student->first) < 0)) {
+            node = node->left;
+        } else {
+            node = node->right;
+        }
+    }
+    return node;
 }
 
 void bst::printTreeIO(BSTNode* n) {
