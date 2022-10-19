@@ -25,5 +25,5 @@ BSTNode::~BSTNode() {
 }
 
 void BSTNode::printNode() {
-    cout << "Node height: " << height << " Student: " << student->first << " " << student->last << endl;
+    cout << "Node height: " << height << " Student: " << student->first << " " << student->last << endl << "Joke: " << student->joke << endl << "--------------------------------------------------------------" << endl;
 }

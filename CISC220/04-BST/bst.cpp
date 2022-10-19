@@ -19,14 +19,14 @@ bool bst::insert(string f, string l, int n, string j) {
 
         if(cmp == 0) {
             // last names are equal; use first names
-            if(next->student->first.compare(f) < 0) {
+            if(next->student->first.compare(f) > 0) {
                 next = next->left;
                 side = false;
             } else {
                 next = next->right;
                 side = true;
             }
-        } else if(cmp < 0) {
+        } else if(cmp > 0) {
             next = next->left;
             side = false;
         } else {
@@ -64,15 +64,21 @@ BSTNode* bst::find(string l, string f) {
 }
 
 void bst::printTreeIO(BSTNode* n) {
-
+    if(n->left != NULL) printTreeIO(n->left);
+    n->printNode();
+    if(n->right != NULL) printTreeIO(n->right);
 }
 
 void bst::printTreePre(BSTNode* n) {
-
+    n->printNode();
+    if(n->left != NULL) printTreePre(n->left);
+    if(n->right != NULL) printTreePre(n->right);
 }
 
 void bst::printTreePost(BSTNode* n) {
-    
+    if(n->left != NULL) printTreePost(n->left);
+    if(n->right != NULL) printTreePost(n->right);
+    n->printNode();
 }
 
 BSTNode* bst::remove(string l, string f) {
@@ -148,5 +154,6 @@ void bst::printTreePost() {
         cout << "Empty Tree" << endl;
     } else {
         cout << endl << "Printing PostOrder:" << endl;
+        printTreePost(root);
     }
 }
