@@ -33,7 +33,6 @@ bool bst::insert(string f, string l, int n, string j) {
             next = next->right;
             side = true;
         }
-        node->height += 1;
     }
 
     if(node->parent == NULL) {
@@ -44,6 +43,8 @@ bool bst::insert(string f, string l, int n, string j) {
     } else {
         node->parent->left = node;
     }
+
+    setHeight(node);
     
     return true; // I'm not sure how this could "fail" to insert the data?
 }
@@ -94,7 +95,12 @@ BSTNode* bst::removeOneKid(BSTNode* tmp, bool leftFlag) {
 }
 
 void bst::setHeight(BSTNode* n) {
+    int maxChild = 0;
+    if(n->left != NULL && n->left->height > maxChild) maxChild = n->left->height;
+    if(n->right != NULL && n->right->height > maxChild) maxChild = n->right->height;
 
+    n->height = maxChild + 1;
+    if(n->parent != NULL) setHeight(n->parent);
 }
 
 /* Constructors provided by Yarrington */

@@ -9,13 +9,13 @@ using namespace std;
 BSTNode::BSTNode() {
     left = right = parent = NULL;
     student = NULL;
-    height = 0;
+    height = 1;
 }
 
 BSTNode::BSTNode(string fName, string lName, int favNum, string joke) {
     left = right = parent = NULL;
     student = new Student(fName, lName, favNum, joke);
-    height = 0;
+    height = 1;
 }
 
 BSTNode::~BSTNode() {
