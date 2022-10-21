@@ -52,7 +52,7 @@ bool bst::insert(string f, string l, int n, string j) {
 BSTNode* bst::find(string l, string f) {
     BSTNode* node = root;
     while(node != NULL) {
-        if(l.compare(node->student->last) == 0 && f.compare(node->student->first)) {
+        if(l.compare(node->student->last) == 0 && f.compare(node->student->first) == 0) {
             // first and last name are a match
             break;
         } else if(l.compare(node->student->last) < 0 || (l.compare(node->student->last) == 0 && f.compare(node->student->first) < 0)) {
@@ -83,15 +83,64 @@ void bst::printTreePost(BSTNode* n) {
 }
 
 BSTNode* bst::remove(string l, string f) {
+    BSTNode* node = find(l, f);
+    if(node == NULL) return NULL;
 
+    if(node->left == NULL && node->right == NULL) {
+        return removeNoKids(node);
+    } else if(node->left != NULL && node->right == NULL) {
+        return removeOneKid(node, true);
+    } else if(node->right != NULL && node->left == NULL) {
+        return removeOneKid(node, false);
+    } else {
+        BSTNode* rightMost = node->left;
+        while(rightMost->right != NULL) {
+            rightMost = rightMost->right;
+        }
+        
+        BSTNode* returnedNode = new BSTNode();
+        returnedNode->student = node->student;
+        node->student = rightMost->student;
+        
+        if(rightMost->left == NULL) removeNoKids(rightMost);
+        else removeOneKid(rightMost, true);
+
+        return returnedNode;
+    }
 }
 
 BSTNode* bst::removeNoKids(BSTNode* tmp) {
-
+    if(tmp->parent != NULL) {
+        if(tmp->parent->left == tmp) tmp->parent->left = NULL;
+        else tmp->parent->right = NULL;
+        setHeight(tmp->parent);
+    } else {
+        root = NULL;
+    }
+    
+    tmp->parent = NULL;
+    return tmp;
 }
 
 BSTNode* bst::removeOneKid(BSTNode* tmp, bool leftFlag) {
+    BSTNode* child;
+    if(leftFlag) {
+        child = tmp->left;
+        tmp->left = NULL;
+    } else {
+        child = tmp->right;
+        tmp->right = NULL;
+    }
 
+    if(tmp->parent != NULL) {
+        if(tmp->parent->left == tmp) tmp->parent->left = child;
+        else tmp->parent->right = child;
+    } else {
+        root = child;
+    }
+
+    tmp->parent = NULL;
+    return tmp;
 }
 
 void bst::setHeight(BSTNode* n) {

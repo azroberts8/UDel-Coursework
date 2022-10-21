@@ -21,19 +21,19 @@ int main() {
 /***** Part 2 Let's Find: ********/
 	cout <<endl<<endl<< "********* Testing Find ************" << endl;
 	cout << "Inserting  Bellatrix: " << endl;
-	tree->tree->find("Bellatrix","Boris");
+	tree->tree->find("Bellatrix","Boris")->printNode();
 	cout << endl;
 
 	cout << "Finding Grotesque: " << endl;
-	tree->tree->find("Grotesque","Griselda");
+	tree->tree->find("Grotesque","Griselda")->printNode();
 	cout << endl;
 
 	cout << "Finding Poltergeist: " << endl;
-	tree->tree->find("Poltergeist","Penelope");
+	tree->tree->find("Poltergeist","Penelope")->printNode();
 	cout << endl;
 
 	cout << "Finding Evil: " << endl;
-	tree->tree->find("Evil","Edward");
+	tree->tree->find("Evil","Edward")->printNode();
 	cout << endl;
 	cout << "##############################################################"<<endl;
 
