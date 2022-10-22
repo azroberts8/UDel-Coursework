@@ -19,9 +19,13 @@ BSTNode::BSTNode(string fName, string lName, int favNum, string joke) {
 }
 
 BSTNode::~BSTNode() {
-    delete left;
-    delete right;
+    // Only calling delete on student because clearTree() recursively deletes nodes causing seg fault if added here
+    cout << "Deleting " << student->first << " " << student->last << endl << endl;
+    left = NULL;
+    right = NULL;
+    parent = NULL;
     delete student;
+    student = NULL;
 }
 
 void BSTNode::printNode() {

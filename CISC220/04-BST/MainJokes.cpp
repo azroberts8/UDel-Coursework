@@ -20,20 +20,20 @@ int main() {
 
 /***** Part 2 Let's Find: ********/
 	cout <<endl<<endl<< "********* Testing Find ************" << endl;
-	cout << "Inserting  Bellatrix: " << endl;
-	tree->tree->find("Bellatrix","Boris")->printNode();
+	cout << "Finding Bellatrix: " << endl;
+	tree->tree->find("Bellatrix","Boris");
 	cout << endl;
 
 	cout << "Finding Grotesque: " << endl;
-	tree->tree->find("Grotesque","Griselda")->printNode();
+	tree->tree->find("Grotesque","Griselda");
 	cout << endl;
 
 	cout << "Finding Poltergeist: " << endl;
-	tree->tree->find("Poltergeist","Penelope")->printNode();
+	tree->tree->find("Poltergeist","Penelope");
 	cout << endl;
 
 	cout << "Finding Evil: " << endl;
-	tree->tree->find("Evil","Edward")->printNode();
+	tree->tree->find("Evil","Edward");
 	cout << endl;
 	cout << "##############################################################"<<endl;
 

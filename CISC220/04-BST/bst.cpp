@@ -50,6 +50,7 @@ bool bst::insert(string f, string l, int n, string j) {
 }
 
 BSTNode* bst::find(string l, string f) {
+    int comparisons = 1;
     BSTNode* node = root;
     while(node != NULL) {
         if(l.compare(node->student->last) == 0 && f.compare(node->student->first) == 0) {
@@ -60,7 +61,10 @@ BSTNode* bst::find(string l, string f) {
         } else {
             node = node->right;
         }
+        comparisons++;
     }
+    node->printNode();
+    cout << "Found " << node->student->first << " " << node->student->last << " in " << comparisons << " comparisons." << endl;
     return node;
 }
 
@@ -133,8 +137,14 @@ BSTNode* bst::removeOneKid(BSTNode* tmp, bool leftFlag) {
     }
 
     if(tmp->parent != NULL) {
-        if(tmp->parent->left == tmp) tmp->parent->left = child;
-        else tmp->parent->right = child;
+        if(tmp->parent->left == tmp) {
+            tmp->parent->left = child;
+            child->parent = tmp->parent;
+        } else {
+            tmp->parent->right = child;
+            child->parent = tmp->parent;
+        }
+        setHeight(tmp->parent);
     } else {
         root = child;
     }
@@ -167,7 +177,7 @@ void bst::clearTree() {
     if(root == NULL) {
         cout << "Tree already empty" << endl;
     } else {
-        cout << "Tree already empty" << endl;
+        cout << endl << "Clearing Tree: " << endl;
         clearTree(root);
         root = NULL;
     }
