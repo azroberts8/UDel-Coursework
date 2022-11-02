@@ -35,17 +35,18 @@ void hashNode::addValue(string v) {
 	// with a key
 }
 void hashNode::dblArray() {
-	if (currSize >= .7*valuesSize){
-		valuesSize = valuesSize * 2;
-		string copy[valuesSize];
-		for(int i = 0; i < valuesSize / 2; i++){
+	if (numKeys >= mapSize){
+		mapsize = size * 2;
+		string copy = new string[mapSize];
+		for(int i = 0; i < mapSize / 2; i++){
 			copy[i] = values[i];
 		}
 		~values;
-		values = new string[valuesSize];
-		for(int i = 0; i < valuesSize; i++){
+		values = new string[mapSize];
+		for(int i = 0; i < mapSize; i++){
 			values[i] = copy[i];
 		}
+
 
 	// when the value array gets full, you need to make a new 
 	// array twice the size of the old one (just double, no 
