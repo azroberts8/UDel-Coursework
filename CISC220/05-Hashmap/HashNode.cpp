@@ -30,10 +30,23 @@ hashNode::hashNode(string s, string v){
 	currSize = 1;
 }
 void hashNode::addValue(string v) {
+
 	// adding a valu to the end of the value array associated 
 	// with a key
 }
 void hashNode::dblArray() {
+	if (currSize >= .7*valuesSize){
+		valuesSize = valuesSize * 2;
+		string copy[valuesSize];
+		for(int i = 0; i < valuesSize / 2; i++){
+			copy[i] = values[i];
+		}
+		~values;
+		values = new string[valuesSize];
+		for(int i = 0; i < valuesSize; i++){
+			values[i] = copy[i];
+		}
+
 	// when the value array gets full, you need to make a new 
 	// array twice the size of the old one (just double, no 
 	//going to next prime) and then copy over the old values 
