@@ -7,7 +7,16 @@
 using namespace std;
 
 hashMap::hashMap(bool hash1, bool coll1) {
-	
+	mapSize = 5;
+	map = new hashNode*[mapSize];
+	for(int i = 0; i < mapSize; i++){
+		map[i]=NULL;
+	}
+	first = "";
+	hashfn = hash1;
+	collfn = coll1;
+	collisions = 0;
+	hashcoll = 0;
 }
 void hashMap::addKeyValue(string k, string v) {
 }
