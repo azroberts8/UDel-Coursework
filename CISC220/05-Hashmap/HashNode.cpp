@@ -30,9 +30,9 @@ hashNode::hashNode(string s, string v){
 	currSize = 1;
 }
 void hashNode::addValue(string v) {
-
-	// adding a valu to the end of the value array associated 
-	// with a key
+	currSize += 1;
+	if(currSize == valuesSize) dblArray();
+	values[currSize] = v;
 }
 
 void hashNode::dblArray() {
@@ -48,9 +48,5 @@ void hashNode::dblArray() {
 }
 
 string hashNode::getRandValue() {
-	//Every key has a values array - an array of words that 
-	// follow that key in the text document.  You're going to 
-	//randomly select one of those words and return it.  That 
-	//will be the word that follows your key in your output 
-	//function, and it will also be the next key.
+	return values[rand() % currSize];
 }
