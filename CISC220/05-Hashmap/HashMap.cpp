@@ -7,6 +7,7 @@
 using namespace std;
 
 hashMap::hashMap(bool hash1, bool coll1) {
+	
 }
 void hashMap::addKeyValue(string k, string v) {
 }
