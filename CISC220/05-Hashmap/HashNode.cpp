@@ -34,26 +34,17 @@ void hashNode::addValue(string v) {
 	// adding a valu to the end of the value array associated 
 	// with a key
 }
+
 void hashNode::dblArray() {
-	if (numKeys >= mapSize){
-		mapsize = size * 2;
-		string copy = new string[mapSize];
-		for(int i = 0; i < mapSize / 2; i++){
-			copy[i] = values[i];
-		}
-		~values;
-		values = new string[mapSize];
-		for(int i = 0; i < mapSize; i++){
-			values[i] = copy[i];
-		}
+	valuesSize += valuesSize;
+	string* oldValues = values;
+	values = new string[valuesSize];
 
+	for(int i = 0; i < valuesSize/2; i++) {
+		values[i] = oldValues[i];
+	}
 
-	// when the value array gets full, you need to make a new 
-	// array twice the size of the old one (just double, no 
-	//going to next prime) and then copy over the old values 
-	//to the new values, then de-allocate the old array.  
-	//Again, just copying over, no hash functiosn involved 
-	//here.
+	delete oldValues;
 }
 
 string hashNode::getRandValue() {
