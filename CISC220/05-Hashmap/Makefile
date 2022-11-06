@@ -4,7 +4,7 @@ BIN = hashmap
 OBJS = HashMap.o HashNode.o mainHash.o MakeSeuss.o
 
 all: ${OBJS}
-	${CC} ${FLAGS} ${FLAGS} -o ${BIN} ${OBJS}
+	${CC} ${FLAGS} -o ${BIN} ${OBJS}
 
 run: all
 	./${BIN}
