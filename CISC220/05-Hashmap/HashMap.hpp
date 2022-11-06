@@ -29,6 +29,10 @@ class hashMap {
 	int hashcoll; //number of initial collisions using just 
 			//the hash function
 
+	// Added these for calculating our primes in getClosestPrime()	
+	int* primeSizes;
+	int primeIndex;
+
 public:
 	hashMap(bool hash1, bool coll1);  // when creating the 
 			//map, make sure you initialize the values to 
