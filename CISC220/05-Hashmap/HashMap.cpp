@@ -51,7 +51,6 @@ int hashMap::getIndex(string k) {
 		}
 	}
 	return index;
-
 }
 
 int hashMap::calcHash2(string k){
@@ -76,6 +75,27 @@ void hashMap::getClosestPrime() {
 }
 
 void hashMap::reHash() {
+	//create new hashmap to store values
+	hashMap *reMap = new hashMap(hashfn, collfn);
+	reMap->mapSize = mapSize;
+	reMap->getClosestPrime();
+	reMap->map = new hashNode* [reMap->mapSize];
+	//fill new array with NULL values
+	for(int i = 0; i < reMap->mapSize; i++){
+		reMap->map[i]=NULL;
+	}
+	//duplicate old values into new HashMap
+	for(int i = 0; i < mapSize; i++){
+		if (map[i] != NULL){
+			int index2 = reMap->getIndex(map[i]->keyword);
+			reMap->map[index2] = map[i];
+		}
+	}
+	//re-initialize old map to new map created and delete the new map
+	map = reMap->map;
+	mapSize = reMap->mapSize;
+	delete reMap;
+
 }
 int hashMap::coll1(int h, int i, string k) {
 }
