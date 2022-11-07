@@ -82,7 +82,7 @@ void hashMap::reHash() {
 
 int hashMap::coll1(int h, int i, string k) {
     // implementing linear probing (i and k are not used)
-    return h+1;
+    return (h+1) % mapSize;
 }
 
 int hashMap::coll2(int h, int i, string k) {

@@ -30,7 +30,8 @@ hashNode::hashNode(string s, string v){
 	currSize = 1;
 }
 void hashNode::addValue(string v) {
-	currSize += 1;
+	currSize++;
+	cout << "\"" << keyword << "\".addValue(" << v << "): Size is now " << currSize << endl;
 	if(currSize == valuesSize) dblArray();
 	values[currSize] = v;
 }
@@ -44,9 +45,15 @@ void hashNode::dblArray() {
 		values[i] = oldValues[i];
 	}
 
-	delete oldValues;
+	//delete oldValues;  <-- Causes a seg fault
 }
 
 string hashNode::getRandValue() {
-	return values[rand() % currSize];
+	cout << "getRandValue() 0" << endl;
+	cout << "Word: " << keyword << endl;
+	int foo = rand();
+	cout << "Rand: " << foo << ", currSize: " << currSize << endl;
+	int temp = foo % currSize;
+	cout << "getRandValue() 1" << endl;
+	return values[temp];
 }
