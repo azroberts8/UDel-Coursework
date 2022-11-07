@@ -31,7 +31,7 @@ hashNode::hashNode(string s, string v){
 }
 void hashNode::addValue(string v) {
 	currSize++;
-	cout << "\"" << keyword << "\".addValue(" << v << "): Size is now " << currSize << endl;
+	//cout << "\"" << keyword << "\".addValue(" << v << "): Size is now " << currSize << endl;
 	if(currSize == valuesSize) dblArray();
 	values[currSize] = v;
 }
@@ -50,9 +50,9 @@ void hashNode::dblArray() {
 
 string hashNode::getRandValue() {
 	cout << "getRandValue() 0" << endl;
-	cout << "Word: " << keyword << endl;
+	//cout << "Word: " << keyword << endl;
 	int foo = rand();
-	cout << "Rand: " << foo << ", currSize: " << currSize << endl;
+	//cout << "Rand: " << foo << ", currSize: " << currSize << ", values[0]: " << values[0] << endl;
 	int temp = foo % currSize;
 	cout << "getRandValue() 1" << endl;
 	return values[temp];

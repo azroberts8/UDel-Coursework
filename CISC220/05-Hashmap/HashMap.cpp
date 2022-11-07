@@ -17,19 +17,17 @@ hashMap::hashMap(bool hash1, bool coll1) {
 
 void hashMap::addKeyValue(string k , string v) {
     int index = getIndex(k);
+    if(map[index] == NULL) {
+        map[index] = new hashNode(k);
+        numKeys++;
+    }
     map[index]->addValue(v);
 }
 
 int hashMap::getIndex(string k) {
     if((float)numKeys / (float)mapSize >= 0.7) reHash();
 
-    int index = findSpace(k);
-    if(map[index] == NULL) {
-        map[index] = new hashNode(k);
-        numKeys++;
-    }
-
-    return index;
+    return findSpace(k);
 }
 
 int hashMap::calcHash1(string k) {
@@ -71,8 +69,7 @@ void hashMap::reHash() {
     for(i = 0; i < oldSize; i++) {
         if(oldMap[i] == NULL) continue;
 
-		if(hashfn) index = calcHash1(oldMap[i]->keyword);
-		else index = calcHash2(oldMap[i]->keyword);
+        index = findSpace(oldMap[i]->keyword);
 
 		map[index] = oldMap[i];
     }
