@@ -9,6 +9,7 @@ const int primeSizes[] = {97, 197, 397, 797, 1597, 3203, 6421, 12853, 25717, 514
 hashMap::hashMap(bool hash1, bool coll1) {
     numKeys, collisions, hashcoll, primeIndex = 0;
     mapSize = primeSizes[primeIndex];
+    map = new hashNode*[mapSize]();
     hashfn = hash1;
     collfn = coll1;
     first = "";
@@ -21,16 +22,19 @@ void hashMap::addKeyValue(string k , string v) {
 
 int hashMap::getIndex(string k) {
     if((float)numKeys / (float)mapSize >= 0.7) reHash();
-    
+
     int index = findSpace(k);
-    if(map[index] == NULL) map[index] = new hashNode(k);
+    if(map[index] == NULL) {
+        map[index] = new hashNode(k);
+        numKeys++;
+    }
 
     return index;
 }
 
 int hashMap::calcHash1(string k) {
     int hash = 0;
-    int temp;
+    unsigned int temp;
     for(int i = 0; i < k.length(); i++) {
         temp = hash + (int)k[i] * (int)pow((double)7, (double)i);
         hash = temp % mapSize;
@@ -40,10 +44,12 @@ int hashMap::calcHash1(string k) {
 
 int hashMap::calcHash2(string k) {
     int hash = 0;
-	for(int i = 0; i < k.length(); i++) {
-		hash = (hash + (int)k[i] * (int)pow((double)17, (double)i)) % mapSize;
-	}
-	return hash;
+    unsigned int temp;
+    for(int i = 0; i < k.length(); i++) {
+        temp = hash + (int)k[i] * (int)pow((double)17, (double)i);
+        hash = temp % mapSize;
+    }
+    return hash;
 }
 
 void hashMap::getClosestPrime() {
@@ -57,11 +63,12 @@ void hashMap::reHash() {
 
     // increment mapSize and generate new map
     getClosestPrime();
-    map = new hashNode*[mapSize];
+    map = new hashNode*[mapSize]();
+    int i;
 
     // copy old values to new map
     int index;
-    for(int i = 0; i < oldSize; i++) {
+    for(i = 0; i < oldSize; i++) {
         if(oldMap[i] == NULL) continue;
 
 		if(hashfn) index = calcHash1(oldMap[i]->keyword);
@@ -91,11 +98,11 @@ int hashMap::findSpace(string k) {
     if(hashfn) index = calcHash1(k);
     else index = calcHash2(k);
 
-    while(map[index] != NULL || map[index]->keyword != k) {
+    while(map[index] != NULL) {
+        if(map[index]->keyword == k) break;
         if(collfn) index = coll1(index, 0, k);
         else index = coll2(index, 0, k);
     }
-
     return index;
 }
 
