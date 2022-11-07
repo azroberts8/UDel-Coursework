@@ -12,7 +12,7 @@ run: all
 .cpp.o:
 	${CC} ${FLAGS} -c $<
 
-HashMap.o: HashMap.cpp HashMap.hpp hashNode.hpp
+HashMap.o: HashMap.cpp HashMap.hpp HashNode.hpp
 MashNode.o: HashNode.cpp HashNode.hpp 
 mainHash.o: mainHash.cpp MakeSeuss.hpp
 MakeSeuss.o: MakeSeuss.cpp MakeSeuss.hpp HashMap.hpp

@@ -29,8 +29,7 @@ class hashMap {
 	int hashcoll; //number of initial collisions using just 
 			//the hash function
 
-	// Added these for calculating our primes in getClosestPrime()	
-	int* primeSizes;
+	// Added this for calculating our primes in getClosestPrime()	
 	int primeIndex;
 
 public:
@@ -77,6 +76,8 @@ public:
 			//for dealing with collisions
 	void printMap();  //I wrote this solely to check if 
 			//everything was working.
+
+	int findSpace(string k);
 };
 
 
