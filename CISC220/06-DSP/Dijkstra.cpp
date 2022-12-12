@@ -43,12 +43,13 @@ void Dijkstra::setDistances(int latestVert) {
 }
 
 //WRITE THIS (8pts)
-int Dijkstra::minDistance( )
+int Dijkstra::minDistance() {
 //This method finds the next unvisited vertex with the minimum
 //distance.
 //Once the minimum is found (along with its index in the distance
 //array), the visited array at that index is set to True and that 
 //index is returned from this method.
+	
 }
 
 

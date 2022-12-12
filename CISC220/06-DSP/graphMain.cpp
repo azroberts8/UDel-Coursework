@@ -1,8 +1,8 @@
 /*
  * graphMain.cpp
  *
- *  Created on: May 6, 2022
- *      Author: 13027
+ *   Edited: December 10, 2022
+ *  Authors: Andrew Roberts & John Serino
  */
 
 
