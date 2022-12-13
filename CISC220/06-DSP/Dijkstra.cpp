@@ -29,6 +29,19 @@ void Dijkstra::runDijkstra(){
 //
 //Note that I also called printInfoSoFar in the loop so I could 
 //see all the updates as we went along.
+	distances[start] = 0;
+	visited[start] = 1;
+
+	setDistances(start);
+	int current = minDistance();
+	printInfoSoFar();
+
+	while(current > -1) {
+		setDistances(current);
+		visited[current] = 1;
+		printInfoSoFar();
+		current = minDistance();
+	}
 }
 
 //WRITE THIS (12 pts)
@@ -43,7 +56,7 @@ void Dijkstra::setDistances(int latestVert) {
 	for(int i = 0; i < numOfCities; i++) {
 		if(distances[latestVert] + matrixGraph[latestVert][i] < distances[i]) {  // if directional calculations are wrong swap coords on matrixGraph
 			distances[i] = distances[latestVert] + matrixGraph[latestVert][i];
-			prev[i] = prev[latestVert];
+			prev[i] = latestVert;
 		}
 	}
 }
@@ -57,7 +70,7 @@ int Dijkstra::minDistance() {
 //index is returned from this method.
 	int minIndex = -1;
 	for(int i = 1; i < numOfCities; i++) {
-		if(minIndex > -1 && !visited[i]) minIndex = i;
+		if(minIndex == -1 && !visited[i]) minIndex = i;
 		else if(distances[i] < distances[minIndex] && !visited[i]) minIndex = i;
 	}
 	return minIndex;
@@ -93,8 +106,8 @@ void Dijkstra::printPath() {
 	}
 
 	// Prints the array in correct order
-	cout << Cities[path[steps-1]];
-	for(int i = steps-2; i > 0; i--) {
+	cout << Cities[path[steps]];
+	for(int i = steps-1; i >= 0; i--) {
 		cout << " -> " << Cities[path[i]];
 	}
 	cout << endl;
