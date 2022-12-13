@@ -67,6 +67,15 @@ int Dijkstra::minDistance() {
 
 //WRITE THIS (12 pts)
 void Dijkstra::printPath() {
+	int *m1 = new int [numOfCities];
+	for (int i = 0; i < numOfCities;i++){
+		m1[i] = prev[i];
+	}
+	for (int i = numOfCities; i > 0; i--){
+		cout << m1[i];
+	}
+}
+
 //This function gives you the final shortest path from the start 
 //index (aka city) to the end index (aka city).  It is very 
 //simple code!!  You must understand how it works, though, in 
