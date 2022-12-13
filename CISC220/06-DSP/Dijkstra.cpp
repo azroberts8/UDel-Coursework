@@ -73,7 +73,6 @@ int Dijkstra::minDistance() {
 		if(minIndex == -1 && !visited[i]) minIndex = i;
 		else if(distances[i] < distances[minIndex] && !visited[i]) minIndex = i;
 	}
-	cout << "Minimum: " << minIndex << endl;
 	return minIndex;
 }
 

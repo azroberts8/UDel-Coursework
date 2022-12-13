@@ -19,13 +19,13 @@ int main() {
 	Dijkstra("MapSmaller.txt");
 
 
-//	Dijkstra("MapSmall.txt");
-//	Dijkstra("MapSmall.txt");
-//	Dijkstra("MapSmall.txt");
+	Dijkstra("MapSmall.txt");
+	Dijkstra("MapSmall.txt");
+	Dijkstra("MapSmall.txt");
 
 
-//	Dijkstra("MapLrg.txt");
-//	Dijkstra("MapLrg.txt");
-//	Dijkstra("MapLrg.txt");
+	Dijkstra("MapLrg.txt");
+	Dijkstra("MapLrg.txt");
+	Dijkstra("MapLrg.txt");
 }
 
