@@ -69,10 +69,11 @@ int Dijkstra::minDistance() {
 //array), the visited array at that index is set to True and that 
 //index is returned from this method.
 	int minIndex = -1;
-	for(int i = 1; i < numOfCities; i++) {
+	for(int i = 0; i < numOfCities; i++) {
 		if(minIndex == -1 && !visited[i]) minIndex = i;
 		else if(distances[i] < distances[minIndex] && !visited[i]) minIndex = i;
 	}
+	cout << "Minimum: " << minIndex << endl;
 	return minIndex;
 }
 
@@ -104,6 +105,7 @@ void Dijkstra::printPath() {
 		current = prev[current];
 		steps++;
 	}
+	path[steps] = current;
 
 	// Prints the array in correct order
 	cout << Cities[path[steps]];
